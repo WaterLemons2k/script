@@ -1,12 +1,13 @@
-#!/bin/bash -e
+#!/bin/bash
 #https://github.com/ylx2016/Linux-NetSpeed/blob/master/tcp.sh
 #https://github.com/longwangjiang/Oracle-warp/blob/main/multi.sh
 
+set -e
 #检查是否为root用户
-[[ $(id -u) != "0" ]] && echo "请使用root用户运行!" && exit 1
+[[ $(whoami) != "root" ]] && echo "请使用root用户运行!" && exit 1
  
- #检查是否为KVM
-#[[ $(hostnamectl | grep Virtualization | awk '{print $2}') != "kvm" ]] && echo "仅支持KVM!" && exit 1
+#检查是否为KVM
+[[ $(hostnamectl | grep Virtualization | awk '{print $2}') != "kvm" ]] && echo "仅支持KVM!" && exit 1
 
 #检查架构
 if [[ $(arch) =~ "x86_64" ]]; then
@@ -22,7 +23,7 @@ if cat /etc/debian_version 2>/dev/null | grep -E '10|11'; then
 
   #安装内核
   clear
-  echo Cloud内核+BBR一键安装脚本 版本1.1.1
+  echo Cloud内核+BBR一键安装脚本 版本1.1.2
   echo 开始安装Cloud内核...
   apt-get update
   apt-get install linux-image-cloud-$ARCH linux-headers-cloud-$ARCH -y
