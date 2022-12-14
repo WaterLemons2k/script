@@ -1,2 +1,0 @@
-# Shell
-Shell scripts from [hiCasper/Shell](https://github.com/hiCasper/Shell), [ylx2016/Linux-NetSpeed](https://github.com/ylx2016/Linux-NetSpeed), [longwangjiang/Oracle-warp](https://github.com/longwangjiang/Oracle-warp), [MoeClub/Note](https://github.com/MoeClub/Note) and [hiboyhiboy/opt-script](https://github.com/hiboyhiboy/opt-script).
