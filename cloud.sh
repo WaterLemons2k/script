@@ -4,10 +4,10 @@ set -e
 #https://github.com/longwangjiang/Oracle-warp/blob/main/multi.sh
 
 #检查是否为root用户
-[[ $(whoami) != "root" ]] && echo "请使用root用户运行!" && exit 1
+[[ $(whoami) != "root" ]] && echo "请使用 root 用户运行!" && exit 1
  
 #检查是否为KVM
-[[ $(hostnamectl | grep Virtualization | awk '{print $2}') != "kvm" ]] && echo "仅支持KVM!" && exit 1
+[[ $(hostnamectl | grep Virtualization | awk '{print $2}') != "kvm" ]] && echo "仅支持 KVM!" && exit 1
 
 #检查架构
 if [[ $(arch) == "x86_64" ]]; then
@@ -23,8 +23,8 @@ if cat /etc/debian_version 2>/dev/null | grep -E '10|11'; then
 
   #安装内核
   clear
-  echo Cloud内核+BBR一键安装脚本 版本1.2.0
-  echo 开始安装Cloud内核...
+  echo "Cloud 内核安装脚本 版本1.2.1"
+  echo "开始安装 Cloud 内核..."
   apt-get update
   apt-get install linux-image-cloud-$ARCH linux-headers-cloud-$ARCH -y
 
@@ -57,7 +57,9 @@ if cat /etc/debian_version 2>/dev/null | grep -E '10|11'; then
       else
         echo -e " 内核数量不正确!" && exit 1
       fi
+      
     echo "准备重启..."
     reboot
-   else echo "仅支持Debian 10/11!"
+    
+  else echo "仅支持 Debian 10/11!"
 fi
