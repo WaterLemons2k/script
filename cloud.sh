@@ -23,10 +23,10 @@ if cat /etc/debian_version 2>/dev/null | grep -E '10|11'; then
 
   #安装内核
   clear
-  echo "Cloud 内核安装脚本 版本1.2.1"
+  echo "Cloud 内核安装脚本 版本1.2.2"
   echo "开始安装 Cloud 内核..."
-  apt-get update
-  apt-get install linux-image-cloud-$ARCH linux-headers-cloud-$ARCH -y
+  DEBIAN_FRONTEND=noninteractive apt-get update
+  DEBIAN_FRONTEND=noninteractive apt-get install linux-image-cloud-$ARCH linux-headers-cloud-$ARCH -y
 
   #卸载内核
   deb_total=$(dpkg -l | grep linux-image | awk '{print $2}' | grep -v "cloud" | wc -l)
@@ -35,8 +35,8 @@ if cat /etc/debian_version 2>/dev/null | grep -E '10|11'; then
         for ((integer = 1; integer <= ${deb_total}; integer++)); do
           deb_del=$(dpkg -l | grep linux-image | awk '{print $2}' | grep -v "cloud" | head -${integer})
           echo -e "开始卸载${deb_del}内核..."
-          apt-get purge -y ${deb_del}
-		      apt-get autoremove -y
+          DEBIAN_FRONTEND=noninteractive apt-get purge -y ${deb_del}
+          DEBIAN_FRONTEND=noninteractive apt-get autoremove -y
           echo -e "${deb_del}内核卸载完成，继续..."
         done
         echo -e "内核卸载完成，继续..."
@@ -49,8 +49,8 @@ if cat /etc/debian_version 2>/dev/null | grep -E '10|11'; then
         for ((integer = 1; integer <= ${deb_total}; integer++)); do
           deb_del=$(dpkg -l | grep linux-headers | awk '{print $2}' | grep -v "cloud" | grep -v "common" | head -${integer})
           echo -e "开始卸载${deb_del}headers内核..."
-          apt-get purge -y ${deb_del}
-		      apt-get autoremove -y
+          DEBIAN_FRONTEND=noninteractive apt-get purge -y ${deb_del}
+	  DEBIAN_FRONTEND=noninteractive apt-get autoremove -y
           echo -e "${deb_del}内核卸载完成，继续..."
         done
         echo -e "内核卸载完成，继续..."
