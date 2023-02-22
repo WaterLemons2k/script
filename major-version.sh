@@ -15,7 +15,7 @@ if [ -z $1 ]; then # If not exist $1
     exit 1
 fi
 
-echo "Auto push MAJOR version tag v1.0.1"
+echo "Auto push MAJOR version tag v1.0.2"
 VERSION=$1
 MAJOR=${VERSION%.*.*}
 echo "Version: $VERSION"
@@ -25,9 +25,7 @@ git tag $VERSION # Create a version tag
 git tag -f $MAJOR # Create a MAJOR version tag
 
 if [ -z $WSL_DISTRO_NAME ]; then # If the environment WSL_DISTRO_NAME does not exist (not WSL)
-    PUSH="git push origin"
+    git push origin main $VERSION $MAJOR --atomic -f
 else # The environment WSL_DISTRO_NAME exists (is WSL)
-    PUSH="powershell.exe git push origin"
+    powershell.exe git push origin main $VERSION $MAJOR --atomic -f
 fi
-
-$PUSH main $VERSION $MAJOR --atomic -f
