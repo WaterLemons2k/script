@@ -11,7 +11,7 @@ set -e
 
 if [ -z $1 ]; then # If not exist $1
     echo "Version tag not found!"
-    echo "Usage: bash ./major-version.sh v1.0.0"
+    echo "Usage: \`bash $0 v1.0.0\`"
     exit 1
 fi
 
