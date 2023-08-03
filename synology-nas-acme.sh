@@ -1,23 +1,20 @@
 #!/bin/bash
-# https://github.com/acmesh-official/acme.sh/wiki/Synology-NAS-Guide
+# Usage: `curl https://github.com/WaterLemons2k/Shell/raw/main/synology-nas-acme.sh | bash`
+# Based on https://github.com/acmesh-official/acme.sh/wiki/Synology-NAS-Guide
 set -euo pipefail
 
-VER=1.0.0
+VER=1.0.1
 NAME="synology-nas-acme.sh"
 ACME_HOME="/usr/local/share/acme.sh"
 
 _log() {
-  printf "[$NAME] %s" "$1"
-}
-
-_logln() {
-  printf "[$NAME] %s\n" "$1"
+  echo "[$NAME] $1"
 }
 
 # Running command as root
 as_root() {
   if [ "$(whoami)" != "root" ]; then
-    _logln "Not root! Try running \`$1\` as root."
+    _log "Not root! Try running \`$1\` as root."
   fi
 
   sudo -E su -c "$1"
@@ -37,8 +34,7 @@ define_env() {
   local _msg=$2
 
   if [ -z "${!_env:-}" ]; then
-    _log "$_msg"
-    read -r value
+    read -rp "$_msg" value
     export "$_env"="$value"
   fi
 }
@@ -62,7 +58,7 @@ install() {
 # Install acme.sh if 'ACME_HOME' is not exists.
 ensure_acme_installed() {
   if [ ! -d "$ACME_HOME" ]; then
-    _logln "acme.sh not found, installing..."
+    _log "acme.sh not found, installing..."
     install
     return
   fi
@@ -112,14 +108,14 @@ cron() {
 }
 
 _done() {
-  _logln "All done! Please refer to
+  _log "All done! Please refer to
 https://github.com/acmesh-official/acme.sh/wiki/Synology-NAS-Guide#configuring-certificate-renewal
 or run \`bash $CURRENT_DIR/$0 cron\` as root to configure certificate renewal."
 }
 
 # https://github.com/acmesh-official/acme.sh/blob/0da839cce35f4ab014a6d62133fac03c8f4c6979/acme.sh#L6713
 version() {
-  _logln "v$VER"
+  _log "v$VER"
 }
 
 # https://github.com/acmesh-official/acme.sh/blob/0da839cce35f4ab014a6d62133fac03c8f4c6979/acme.sh#L6843
