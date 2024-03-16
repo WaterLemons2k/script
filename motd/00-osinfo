@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# osinfo - show information about the operating system
+
+# You can place this script in /etc/update-motd.d/.
+
+#shellcheck source=/dev/null
+OS=$(
+  . /etc/os-release
+  echo "$PRETTY_NAME"
+)
+KERNEL=$(uname -r)
+
+# Doesn't work if -p is not supported
+UPTIME=$(uptime -p)
+
+echo "$OS with kernel $KERNEL, $UPTIME"
