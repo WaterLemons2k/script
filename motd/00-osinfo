@@ -11,7 +11,5 @@ OS=$(
 )
 KERNEL=$(uname -r)
 
-# Doesn't work if -p is not supported
-UPTIME=$(uptime -p)
-
-echo "$OS with kernel $KERNEL, $UPTIME"
+echo "Welcome to $OS ($KERNEL)"
+echo "$(uptime -p)"
