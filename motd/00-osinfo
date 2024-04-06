@@ -9,7 +9,7 @@ OS=$(
   . /etc/os-release
   echo "$PRETTY_NAME"
 )
-KERNEL=$(uname -r)
+KERNEL=$(uname -rv)
 
-echo "Welcome to $OS ($KERNEL)"
-echo "$(uptime -p)"
+echo "$OS $KERNEL"
+uptime -p
