@@ -1,9 +1,10 @@
 #!/bin/bash
-# Usage: `curl https://github.com/WaterLemons2k/Shell/raw/main/synology-nas-acme.sh | bash`
+
+# Usage: `curl -L https://github.com/WaterLemons2k/Shell/raw/main/synology-nas-acme.sh | bash`
 # Based on https://github.com/acmesh-official/acme.sh/wiki/Synology-NAS-Guide
 set -euo pipefail
 
-VER=1.0.1
+VER=1.0.2
 NAME="synology-nas-acme.sh"
 ACME_HOME="/usr/local/share/acme.sh"
 
@@ -96,11 +97,8 @@ deploy() {
   set_current_path_to_ACME_HOME
   define_CERT_DOMAIN
 
-  define_env "SYNO_Username" "Input the Synology DSM username used as the \`SYNO_Username\` env: "
-  define_env "SYNO_Password" "Input the Synology DSM password: used as the \`SYNO_Password\` env: "
-  define_env "SYNO_Device_ID" "Input the Synology DSM website's 'did' cookies value used as the \`SYNO_Device_ID\` env: "
 
-  SYNO_Create=1 ./acme.sh --deploy --insecure --home . -d "$CERT_DOMAIN" --deploy-hook synology_dsm
+  SYNO_CREATE=1 SYNO_USE_TEMP_ADMIN=1 ./acme.sh --deploy --insecure --home . -d "$CERT_DOMAIN" --deploy-hook synology_dsm
 }
 
 cron() {
