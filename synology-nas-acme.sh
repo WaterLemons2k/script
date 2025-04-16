@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Usage: `curl -L https://github.com/WaterLemons2k/Shell/raw/main/synology-nas-acme.sh | bash`
+# Usage: `curl -LO https://github.com/WaterLemons2k/Shell/raw/main/synology-nas-acme.sh && ./synology-nas-acme.sh`
 # Based on https://github.com/acmesh-official/acme.sh/wiki/Synology-NAS-Guide
 set -euo pipefail
 
